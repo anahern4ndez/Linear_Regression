@@ -12,28 +12,43 @@ cv_set = data[240:320,]
 test = data[320:,]
 #X,y = t_set[:,1:len(t_set[0])-1], t_set[:,len(t_set[0])-1:len(t_set[0])],
 #X,y = t_set[:,1], t_set[:,len(t_set[0])-1:len(t_set[0])]
-X, y = np.vstack((np.ones(len(t_set)), t_set[:,6], t_set[:,6]**2)).T, t_set[:,len(t_set[0])-1:len(t_set[0])]
 
+# X, y = np.vstack((np.ones(len(t_set)), t_set[:,1])).T, t_set[:,len(t_set[0])-1:len(t_set[0])]
+
+y = t_set[:,len(t_set[0])-1:len(t_set[0])]
+
+X = np.vstack((
+    np.ones(len(t_set)),
+    t_set[:,1],
+    t_set[:,1] **2 /100
+)).T
+
+# print(X)
 x_t = X[:,1]
 m, n = X.shape
 
 theta_0 = np.random.rand(n, 1)
-
-theta = gradient_descent(
+theta, costs, gradient_norms = gradient_descent(
     X,
     y,
     theta_0,
-    linear_cost,
-    linear_cost_derivate,
+    linear_cost_regular,
+    linear_cost_derivate_regular,
     alpha=0.000001,
-    threshold=0.000001,
-    max_iter=100000,
-    lamda=2
+    threshold=0.01,
+    max_iter= 90000,
+    lamda=0
 )
 
-plt.scatter(x_t, y)
+#print(gradient_norms)
+plt.scatter(X[:, 1], y)
 
-#plt.plot(X[:, 1], np.matmul(X, theta), color='red')
-plt.plot(x_t, (x_t*theta[1] + theta[0]), color='red')
-
+y = np.matmul(X, theta)
+# y = (x_t*theta[1] + theta[0])
+plt.plot(X[:, 1], y, color='red')
+#plt.plot(x_t, (x_t*theta[1] + theta[0]), color='red')
 plt.show()
+
+# plt.plot(np.arange(len(costs)), costs)
+
+# plt.show()
