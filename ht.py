@@ -36,8 +36,8 @@ theta, costs, gradient_norms = gradient_descent(
     linear_cost_derivate_regular,
     alpha=0.000001,
     threshold=0.01,
-    max_iter= 90000,
-    lamda=0
+    max_iter= 100000,
+    lamda=10
 )
 
 #print(gradient_norms)
@@ -45,7 +45,7 @@ plt.scatter(X[:, 1], y)
 
 y = np.matmul(X, theta)
 # y = (x_t*theta[1] + theta[0])
-plt.plot(X[:, 1], y, color='red')
+plt.scatter(X[:, 1], y, color='red')
 #plt.plot(x_t, (x_t*theta[1] + theta[0]), color='red')
 plt.show()
 
