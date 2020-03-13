@@ -64,5 +64,7 @@ def linear_cost_regular(x, y, theta, lamda):
 def linear_cost_derivate_regular(x, y ,theta, lamda):
     h = np.matmul(x, theta)
     m,_ = x.shape
+    res =(np.matmul((h-y).T, x).T / m)
     regularization = (lamda/m)*((theta).sum())
-    return (np.matmul((h-y).T, x).T / m) + regularization
+    print(res, regularization)
+    return res + regularization

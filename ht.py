@@ -40,13 +40,15 @@ theta, costs, gradient_norms = gradient_descent(
     lamda=10
 )
 
-#print(gradient_norms)
-plt.scatter(X[:, 1], y)
 
-y = np.matmul(X, theta)
-# y = (x_t*theta[1] + theta[0])
+#r^2
+r2 = y - y.mean()
+
+
+
+## graficas 
+plt.scatter(X[:, 1], y)
 plt.scatter(X[:, 1], y, color='red')
-#plt.plot(x_t, (x_t*theta[1] + theta[0]), color='red')
 plt.show()
 
 # plt.plot(np.arange(len(costs)), costs)
