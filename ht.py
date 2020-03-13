@@ -40,15 +40,16 @@ theta, costs, gradient_norms = gradient_descent(
     lamda=10
 )
 
-
+y_predic = np.matmul(X, theta)
 #r^2
-r2 = y - y.mean()
+r2 = (((y-y.mean())**2).sum()-((np.matmul(X, theta)-y)**2).sum())/((y-y.mean())**2).sum()
+print("R^2: ", r2)
 
 
 
 ## graficas 
 plt.scatter(X[:, 1], y)
-plt.scatter(X[:, 1], y, color='red')
+plt.scatter(X[:, 1], y_predic, color='red')
 plt.show()
 
 # plt.plot(np.arange(len(costs)), costs)
