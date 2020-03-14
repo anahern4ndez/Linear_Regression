@@ -11,31 +11,14 @@ def gradient_descent(
         max_iter=10000,
         lamda=0):
     theta, i = theta_0, 0
+    costs = []
+    gradient_norms = []
     while np.linalg.norm(cost_derivate(X, y, theta, lamda)) > threshold and i < max_iter:
         theta -= alpha * cost_derivate(X, y, theta, lamda)
         i += 1
+        costs.append(cost(X, y, theta, lamda))
+        gradient_norms.append(cost_derivate(X, y, theta, lamda))
     return theta
-
-# def gradient_descent(
-#         X,
-#         y,
-#         theta_0,
-#         cost,
-#         cost_derivate,
-#         alpha=0.00001,
-#         threshold=0.0001,
-#         max_iter=10000,
-#         lamda = 0):
-#     theta, i = theta_0, 0
-#     while np.linalg.norm(cost_derivate(X, y, theta, lamda)) > threshold and threshold and i < max_iter:
-#         #print(theta, cost_derivate(X, y, theta, lamda))
-#         print(np.linalg.norm(cost_derivate(X, y, theta, lamda)))
-#         theta -= alpha * cost_derivate(X, y, theta, lamda)
-#         i += 1
-#         # if(i > max_iter-1):
-#         #     print("iter")
-#     return theta
-
 
 def linear_cost(x, y, theta, lamda=0):
     m, _ = x.shape
